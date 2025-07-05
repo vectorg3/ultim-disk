@@ -1,0 +1,52 @@
+<p-card class="w-100" header="Sign up" subheader="Fill information about you">
+  <form #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)" pFocusTrap class="flex flex-col gap-3">
+    <div class="form-field">
+      <p-iconfield>
+        <p-inputicon>
+          <i class="pi pi-user"></i>
+        </p-inputicon>
+        <input type="text" pInputText id="input" pSize="small" [(ngModel)]="data.name" name="username"
+               placeholder="Name"
+               #username=ngModel [pAutoFocus]="true" [fluid]="true" required [invalid]="username.invalid && (username.touched || exampleForm.submitted)"/>
+      </p-iconfield>
+      @if (username.invalid && (username.touched || exampleForm.submitted)) {
+        <p-message severity="error" size="small" variant="simple">Username is required.</p-message>
+      }
+    </div>
+    <div class="form-field">
+      <p-iconfield>
+        <p-inputicon>
+          <i class="pi pi-envelope"> </i>
+        </p-inputicon>
+        <input pInputText id="email" [(ngModel)]="data.email" name="email" pSize="small" type="email" placeholder="Email"
+               #email=ngModel [fluid]="true" required email [invalid]="email.invalid && (email.touched || exampleForm.submitted)"/>
+      </p-iconfield>
+      @if (email.invalid && (email.touched || exampleForm.submitted)) {
+        <p-message severity="error" size="small" variant="simple">
+          @if (email.hasError('required')) {
+            Email is Required.
+          }
+          @if (email.hasError('email')) {
+            Please enter a valid email.
+          }
+        </p-message>
+      }
+    </div>
+    <div class="form-field">
+      <p-iconfield>
+        <p-inputicon>
+          <i class="pi pi-lock"></i>
+        </p-inputicon>
+        <p-password [(ngModel)]="data.password" name="password" placeholder="Password" size="small" [fluid]="true"
+                    [toggleMask]="true"
+                    #password=ngModel></p-password>
+      </p-iconfield>
+      @if (data.password.length < 6 && (password.touched || exampleForm.submitted)) {
+        <p-message severity="error" size="small" variant="simple">Password must contain at least 6 symbols</p-message>
+      }
+    </div>
+    <p-button type="submit" size="small" label="Submit" class="mt-2" styleClass="w-full" severity="contrast" [loading]="loading"/>
+    <a routerLink="/auth/login" class="text-center text-blue-600 hover:underline">I need to sign-in</a>
+  </form>
+  <p-toast />
+</p-card>
