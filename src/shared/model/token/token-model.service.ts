@@ -9,14 +9,19 @@ export class TokenModelService {
   constructor() { }
 
   setTokens(tokens: ITokens) {
-    localStorage.setItem('accessToken', JSON.stringify(tokens.accessToken));
-    localStorage.setItem('refreshToken', JSON.stringify(tokens.refreshToken));
+    localStorage.setItem('accessToken', tokens.accessToken);
+    localStorage.setItem('refreshToken', tokens.refreshToken);
   }
 
   getTokens(): ITokensUnpacked {
     return {
-      accessToken: localStorage.getItem('accessToken') ?? undefined,
-      refreshToken: localStorage.getItem('refreshToken') ?? undefined,
+      accessToken: String(localStorage.getItem('accessToken')) ?? undefined,
+      refreshToken: String(localStorage.getItem('refreshToken')) ?? undefined,
     }
+  }
+
+  clearTokens(): void {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 }

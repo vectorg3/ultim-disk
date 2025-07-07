@@ -9,7 +9,7 @@ import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
 import {Password} from 'primeng/password';
 import {ILoginDto} from '../../model';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {AutoFocus} from 'primeng/autofocus';
 import {AuthApiService} from '../../api';
 import {MessageService} from 'primeng/api';
@@ -41,6 +41,7 @@ export class LoginPageComponent {
   private readonly authService = inject(AuthApiService);
   private readonly tokenModelService = inject(TokenModelService);
   private readonly messageService = inject(MessageService);
+  private readonly router = inject(Router);
 
   public loading: boolean = false;
 
@@ -53,7 +54,10 @@ export class LoginPageComponent {
     if (form.valid) {
       this.loading = true;
       this.authService.login(this.data).subscribe({
-        next: data => this.tokenModelService.setTokens(data),
+        next: data => {
+          this.tokenModelService.setTokens(data);
+          this.router.navigate(['/dashboard']);
+        },
         error: (error: {error: IServerError}) => {
           this.messageService.add({life: 3000, severity: 'error', summary: 'Error', detail: error.error.message})
           this.loading = false;

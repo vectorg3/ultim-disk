@@ -25,8 +25,7 @@
           <i class="pi pi-lock"></i>
         </p-inputicon>
         <p-password [(ngModel)]="data.password" name="password" placeholder="Password" size="small" [fluid]="true"
-                    [toggleMask]="true"
-                    #password=ngModel></p-password>
+                    [toggleMask]="true" #password=ngModel [feedback]="false"></p-password>
       </p-iconfield>
       @if (data.password.length < 6 && (password.touched || exampleForm.submitted)) {
         <p-message severity="error" size="small" variant="simple">Password must contain at least 6 symbols</p-message>

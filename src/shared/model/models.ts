@@ -4,7 +4,4 @@ export interface IServerError {
   statusCode: number;
 }
 
-export interface IUser {
-  name: string;
-  email: string;
-}
+export const TokenExpiredError = 'Token expired'

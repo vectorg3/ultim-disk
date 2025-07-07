@@ -1,0 +1,16 @@
+<p-avatar class="select-none cursor-pointer" [label]="(userAvatar$ | async) || 'X'" size="large" shape="circle" (click)="userMenu.toggle($event)"></p-avatar>
+<p-menu #userMenu [popup]="true" [model]="menuItems">
+  <ng-template #start>
+    @if((user$ | async); as user) {
+    <div class="flex flex-col items-center w-60 p-3">
+      <p-avatar [label]="(userAvatar$ | async) || 'X'" size="large" shape="circle"></p-avatar>
+      <div class="userMenu__name text-2xl bold font-semibold">
+        {{ user.name }}
+      </div>
+      <div class="userMenu__email text-sm">
+        {{ user.email }}
+      </div>
+    </div>
+    }
+  </ng-template>
+</p-menu>
