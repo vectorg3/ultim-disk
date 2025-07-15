@@ -1,3 +1,18 @@
-<div class="flex flex-col w-full h-full p-2">
+<div class="flex flex-col w-full h-full p-2 gap-2">
   <app-header></app-header>
+  <div class="disk-panel flex flex-row w-full h-full">
+    <div class="flex flex-col items-center gap-2 w-50">
+      <app-file-upload></app-file-upload>
+      <app-file-create-btn></app-file-create-btn>
+    </div>
+    <p-divider layout="vertical"/>
+    <div class="disk-layout flex flex-col w-full h-full">
+      <div class="disk-layout__title text-3xl">Files</div>
+      <div class="disk-layout__grid">
+        <app-files-breadcrumb></app-files-breadcrumb>
+        <app-files-table></app-files-table>
+      </div>
+    </div>
+  </div>
+  <p-toast position="top-right"/>
 </div>

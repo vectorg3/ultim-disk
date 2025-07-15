@@ -1,0 +1,39 @@
+<p-table
+  [value]="(fileList$ | async)!"
+  [tableStyle]="{width: '100%', height: '100%'}"
+  size="small"
+  selectionMode="single"
+  dataKey="_id"
+>
+  <ng-template #header>
+    <tr>
+      <th width="4%">Type</th>
+      <th width="65%">Name</th>
+      <th width="15%">Create date</th>
+      <th width="10%">Size</th>
+      <th width="5%">Link</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-file>
+    <tr (dblclick)="openDirectory(file._id)">
+      <td>
+        @switch (file.type) {
+          @case (FileType.dir) {
+            <i class="pi pi-folder" style="margin-left: 20%"></i>
+          }
+          @default {
+            <i class="pi pi-file" style="margin-left: 20%"></i>
+          }
+        }
+      </td>
+      <td>{{ file.name }}</td>
+      <td>{{ file.createdAt | date : 'dd.MM.yyyy' }}</td>
+      <td>{{ file.size }}</td>
+      <td>
+        @if(file.accessLink) {
+          <p-button icon="pi pi-link" size="small" severity="secondary" ></p-button>
+        }
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,4 @@
+<div class="flex flex-col w-full gap-3 items-end">
+  <input #textInput type="text" pInputText [(ngModel)]="name" [pAutoFocus]="true" style="width: 100%;" [selectionStart]="0" [selectionEnd]="name.length"/>
+  <p-button size="small" label="Create" [disabled]="!name" (onClick)="closeDialog()"></p-button>
+</div>

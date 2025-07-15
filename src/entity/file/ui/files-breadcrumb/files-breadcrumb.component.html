@@ -1,0 +1,11 @@
+<div class="flex gap-2 items-center">
+  <p-button
+    size="small"
+    severity="contrast"
+    icon="pi pi-arrow-left"
+    (onClick)="back()"
+    label="Back"
+    [hidden]="(items$ | async)!.length == 0"
+  ></p-button>
+  <p-breadcrumb size="small" [model]="(items$ | async)!" [home]="{icon: 'pi pi-home'}" class="breadcrumb"></p-breadcrumb>
+</div>

@@ -34,6 +34,9 @@ export const authGuard: CanActivateFn = (route, state) => {
                 map((user) => {
                   userModelService.currentUser$.next(user);
                   return blockRoute()
+                }),
+                catchError((err) => {
+                  return blockRoute()
                 })
               )
           } catch (err) {
