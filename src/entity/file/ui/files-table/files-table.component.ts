@@ -3,6 +3,7 @@ import {FileModelService, FileType} from '@entity/file';
 import {TableModule} from 'primeng/table';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {Button} from 'primeng/button';
+import {FileSizePipe} from '@entity/file/ui/files-table/file-size.pipe';
 
 @Component({
   selector: 'app-files-table',
@@ -10,7 +11,8 @@ import {Button} from 'primeng/button';
     TableModule,
     AsyncPipe,
     DatePipe,
-    Button
+    Button,
+    FileSizePipe
   ],
   templateUrl: './files-table.component.html',
   styleUrl: './files-table.component.scss',
