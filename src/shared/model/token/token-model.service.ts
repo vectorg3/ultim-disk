@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ITokens, ITokensUnpacked} from './tokens.models';
+import {ITokens, ITokensUnpacked} from '@shared/model';
 
 @Injectable({
   providedIn: 'root'

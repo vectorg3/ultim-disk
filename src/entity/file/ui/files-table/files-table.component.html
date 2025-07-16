@@ -28,7 +28,7 @@
       </td>
       <td>{{ file.name }}</td>
       <td>{{ file.createdAt | date : 'dd.MM.yyyy' }}</td>
-      <td>{{ file.size }}</td>
+      <td>{{ file.size | fileSize }}</td>
       <td>
         @if(file.accessLink) {
           <p-button icon="pi pi-link" size="small" severity="secondary" ></p-button>

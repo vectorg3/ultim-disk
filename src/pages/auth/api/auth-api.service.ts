@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ILoginDto, IRegisterDto} from '../model';
-import {environment} from '../../../environments';
-import {ITokens} from '../../../shared';
+import {environment} from '@env/environment';
+import {ITokens} from '@shared/model';
 import {Observable} from 'rxjs';
 
 @Injectable({

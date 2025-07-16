@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {HeaderComponent} from '../../../../shared';
+import {HeaderComponent} from '@shared/ui';
 import {Divider} from 'primeng/divider';
-import {FileCreateBtnComponent, FileUploadComponent} from '../../../../features';
-import {FilesBreadcrumbComponent, FilesTableComponent} from '../../../../entity/file';
+import {FilesBreadcrumbComponent, FilesTableComponent} from '@entity/file';
 import {Toast} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {FileUploadComponent} from '@features/file-upload';
+import {FileCreateBtnComponent} from '@features/file-create';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {FilesSearchComponent} from '../../../features';
-import {UserMenuComponent} from '../../../entity/user/ui/user-menu/user-menu.component';
+import {FilesSearchComponent} from '@features/files-search';
+import {UserMenuComponent} from '@entity/user';
 
 @Component({
   selector: 'app-header',

@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Avatar} from 'primeng/avatar';
-import {UserModelService} from '../../model';
+import {UserModelService} from '@entity/user';
 import {filter, map} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {Menu} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
-import {TokenModelService} from '../../../../shared';
+import {TokenModelService} from '@shared/model';
 import {Router} from '@angular/router';
 
 @Component({

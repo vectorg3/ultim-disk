@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Breadcrumb} from 'primeng/breadcrumb';
-import {FileModelService} from '../../model';
 import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {MenuItem} from 'primeng/api';
 import {Button} from 'primeng/button';
+import {FileModelService} from '@entity/file';
 
 @Component({
   selector: 'app-files-breadcrumb',

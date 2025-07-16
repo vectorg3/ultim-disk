@@ -1,9 +1,9 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {catchError, throwError} from 'rxjs';
-import {TokenExpiredError, TokenModelService} from '../../shared';
 import {inject} from '@angular/core';
-import {TokenApiService} from '../../shared/api/token/token-api.service';
 import {Router} from '@angular/router';
+import {TokenApiService} from '@shared/api/token/token-api.service';
+import {TokenExpiredError, TokenModelService} from '@shared/model';
 
 // Ловит ошибку если access token истек, обновляет токены
 export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
