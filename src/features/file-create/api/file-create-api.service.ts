@@ -1,13 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments';
+import {environment} from '@env/environment';
+import {IFileCreateDto} from '@features/file-create';
 
-
-export interface IFileCreateDto {
-  name: string;
-  type: string;
-  parent?: string;
-}
 @Injectable({
   providedIn: 'root'
 })

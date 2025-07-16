@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
-import {FileModelService, FileType} from '../../model';
+import {FileModelService, FileType} from '@entity/file';
 import {TableModule} from 'primeng/table';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {Button} from 'primeng/button';

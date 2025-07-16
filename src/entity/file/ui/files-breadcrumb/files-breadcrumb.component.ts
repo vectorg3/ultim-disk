@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Breadcrumb} from 'primeng/breadcrumb';
-import {FileModelService} from '../../model';
+import {FileModelService} from '@entity/file';
 import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {MenuItem} from 'primeng/api';

@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Button} from "primeng/button";
 import {Menu} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
-import {FileCreateModelService} from '../../model';
+import {FileCreateModelService} from '@features/file-create';
 import {DialogService} from 'primeng/dynamicdialog';
-import {FileCreateType} from '../../model/file-create-model.service';
+import {FileCreateType} from '@features/file-create/model/file-create-model.service';
 
 @Component({
   selector: 'app-file-create-btn',

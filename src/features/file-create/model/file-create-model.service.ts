@@ -1,11 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {FileCreateDialogComponent} from '../ui/file-create-dialog';
-import {FileCreateApiService} from '../api';
-import {FileModelService} from '../../../entity/file';
-import {IFileCreateDto} from '../api/file-create-api.service';
+import {FileCreateApiService, FileCreateDialogComponent, IFileCreateDto} from '@features/file-create';
+import {FileModelService} from '@entity/file';
 import {MessageService} from 'primeng/api';
-
 
 export enum FileCreateType {
   directory = 'dir',

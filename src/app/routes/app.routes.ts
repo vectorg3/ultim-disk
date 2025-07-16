@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
-import {DashboardComponent, LoginPageComponent, RegisterPageComponent} from '../../pages';
-import {authGuard} from './guards/auth.guard';
+import {authGuard} from '@app/routes/guards';
+import {LoginPageComponent, RegisterPageComponent} from '@pages/auth';
+import {DashboardComponent} from '@pages/dashboard';
 
 export const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from '../../../environments';
-import {IFileModel} from '../model';
+import {environment} from '@env/environment';
+import {IFileModel} from '@entity/file';
 
 @Injectable({
   providedIn: 'root'

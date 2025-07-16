@@ -4,15 +4,15 @@ import {InputIcon} from 'primeng/inputicon';
 import {IconField} from 'primeng/iconfield';
 import {AutoFocus} from 'primeng/autofocus';
 import {InputText} from 'primeng/inputtext';
-import {IRegisterDto} from '../../model';
+import {IRegisterDto} from '@pages/auth';
 import {FormsModule} from '@angular/forms';
 import {FocusTrap} from 'primeng/focustrap';
 import {Button} from 'primeng/button';
 import {Password} from 'primeng/password';
 import {Message} from 'primeng/message';
 import {Router, RouterLink} from '@angular/router';
-import {IServerError, TokenModelService} from '../../../../shared';
-import {AuthApiService} from '../../api';
+import {IServerError, TokenModelService} from '@shared/model';
+import {AuthApiService} from '@pages/auth/api';
 import {MessageService} from 'primeng/api';
 import {Toast} from 'primeng/toast';
 
