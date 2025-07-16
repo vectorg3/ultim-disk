@@ -1,9 +1,8 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
+import {FileModelService, FileType} from '../../model';
 import {TableModule} from 'primeng/table';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {Button} from 'primeng/button';
-import {FileModelService, FileType} from '@entity/file';
-import {FileSizePipe} from '@entity/file/ui/files-table/file-size.pipe';
 
 @Component({
   selector: 'app-files-table',
@@ -11,8 +10,7 @@ import {FileSizePipe} from '@entity/file/ui/files-table/file-size.pipe';
     TableModule,
     AsyncPipe,
     DatePipe,
-    Button,
-    FileSizePipe,
+    Button
   ],
   templateUrl: './files-table.component.html',
   styleUrl: './files-table.component.scss',
@@ -26,6 +24,6 @@ export class FilesTableComponent {
 
   openDirectory(id: string) {
     const file = structuredClone(this.fileList$.value).find((i) => i._id === id)!;
-    if(file.type == 'dir') this.fileModelService.openDirectory(file)
+    this.fileModelService.openDirectory(file)
   }
 }

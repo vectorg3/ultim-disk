@@ -8,12 +8,13 @@ import {InputIcon} from 'primeng/inputicon';
 import {InputText} from 'primeng/inputtext';
 import {Message} from 'primeng/message';
 import {Password} from 'primeng/password';
-import {AuthApiService, ILoginDto} from '@pages/auth';
+import {ILoginDto} from '../../model';
 import {Router, RouterLink} from '@angular/router';
 import {AutoFocus} from 'primeng/autofocus';
+import {AuthApiService} from '../../api';
 import {MessageService} from 'primeng/api';
 import {Toast} from 'primeng/toast';
-import {IServerError, TokenModelService} from '@shared/model';
+import {IServerError, TokenModelService} from '../../../../shared';
 
 @Component({
   selector: 'app-login-page',

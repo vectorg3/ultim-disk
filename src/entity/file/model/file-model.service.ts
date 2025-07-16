@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {FileApiService, IFileModel, IFileStackItem} from '@entity/file';
+import {FileApiService} from '../api';
+import {IFileModel, IFileStackItem} from './file.model';
 
 @Injectable({
   providedIn: 'root'

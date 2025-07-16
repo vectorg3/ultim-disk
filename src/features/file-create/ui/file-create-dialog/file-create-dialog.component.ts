@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, ViewChild} from '@angular/core';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {InputText} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
@@ -18,7 +18,7 @@ import {Button} from 'primeng/button';
   styleUrl: './file-create-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileCreateDialogComponent implements OnInit {
+export class FileCreateDialogComponent {
   @ViewChild('textInput') textInput: ElementRef<HTMLInputElement> | undefined;
   name: string = 'New Directory';
 
