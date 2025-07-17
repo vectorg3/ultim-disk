@@ -1,1 +1,2 @@
-<p-button label="Upload" icon="pi pi-upload" severity="primary" size="small" styleClass="w-full"></p-button>
+<p-button label="Upload" icon="pi pi-upload" severity="primary" size="small" styleClass="w-full" (onClick)="fileInput.click()"></p-button>
+<input style="display: none" type="file" #fileInput (change)="onFileInputChange($event)">

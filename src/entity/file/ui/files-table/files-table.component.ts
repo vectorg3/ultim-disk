@@ -26,6 +26,7 @@ export class FilesTableComponent {
 
   openDirectory(id: string) {
     const file = structuredClone(this.fileList$.value).find((i) => i._id === id)!;
+    if (file.type !== FileType.dir) return;
     this.fileModelService.openDirectory(file)
   }
 }
