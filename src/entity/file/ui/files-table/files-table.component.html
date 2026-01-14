@@ -1,9 +1,15 @@
+<p-context-menu #cm [model]="(contextMenuItems$ | async) ?? []" (onHide)="selectedFile$.next(null)"></p-context-menu>
+
 <p-table
   [value]="(fileList$ | async)!"
   [tableStyle]="{width: '100%', height: '100%'}"
+  [contextMenuSelection]="selectedFile$ | async"
+  (contextMenuSelectionChange)="selectedFile$.next($event)"
+  [contextMenu]="cm"
   size="small"
   selectionMode="single"
   dataKey="_id"
+  class="no-context-selection"
 >
   <ng-template #header>
     <tr>
@@ -15,7 +21,7 @@
     </tr>
   </ng-template>
   <ng-template #body let-file>
-    <tr (dblclick)="openDirectory(file._id)">
+    <tr (dblclick)="openDirectory(file._id)" [pContextMenuRow]="file">
       <td>
         @switch (file.type) {
           @case (FileType.dir) {

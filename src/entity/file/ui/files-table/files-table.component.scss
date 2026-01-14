@@ -1,0 +1,8 @@
+.no-context-selection {
+  ::ng-deep {
+    .p-datatable-contextmenu-row-selected {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
