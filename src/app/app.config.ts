@@ -5,15 +5,17 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {tokenInterceptor} from './interceptors/token.interceptor';
-import {refreshTokenInterceptor} from './interceptors/refresh-token.interceptor';
+import {refreshTokenInterceptor, tokenInterceptor} from '@app/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: '.app-dark'
+        }
       },
       ripple: true
     }),
