@@ -8,6 +8,8 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {refreshTokenInterceptor, tokenInterceptor} from '@app/interceptors';
 import {UserModelService} from '@entity/user';
 import {USER_TOKEN} from '@entity/user/model/models';
+import {MessageService} from 'primeng/api';
+import {NotificationService} from '@shared/lib/services';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([tokenInterceptor, refreshTokenInterceptor])),
     { provide: USER_TOKEN, useFactory: (s: UserModelService) => s.currentUser$, deps: [UserModelService]},
+    MessageService,
+    NotificationService
   ]
 };

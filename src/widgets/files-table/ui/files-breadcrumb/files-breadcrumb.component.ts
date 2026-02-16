@@ -4,7 +4,7 @@ import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {MenuItem} from 'primeng/api';
 import {Button} from 'primeng/button';
-import {FilesTableModelService} from '@widgets/files-table/model';
+import {FileManagerService} from '@entity/file/model';
 
 @Component({
   selector: 'app-file-breadcrumb',
@@ -18,11 +18,11 @@ import {FilesTableModelService} from '@widgets/files-table/model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilesBreadcrumbComponent {
-  private filesTableModelService = inject(FilesTableModelService);
+  private fileManagerService = inject(FileManagerService);
 
-  public items$: Observable<MenuItem[]> = this.filesTableModelService.fileStack$.pipe(
+  public items$: Observable<MenuItem[]> = this.fileManagerService.fileStack$.pipe(
     map((items) => (items.map((item) => ({label: item.name}))))
   )
 
-  back = () => this.filesTableModelService.backToPrevDir();
+  back = () => this.fileManagerService.backToPrevDir();
 }

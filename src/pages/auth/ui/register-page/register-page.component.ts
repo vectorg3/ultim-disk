@@ -13,9 +13,8 @@ import {Message} from 'primeng/message';
 import {Router, RouterLink} from '@angular/router';
 import {IServerError} from '@shared/model';
 import {AuthApiService} from '@pages/auth/api';
-import {MessageService} from 'primeng/api';
-import {Toast} from 'primeng/toast';
 import {TokenModelService} from '@entity/token/model';
+import {NotificationService} from '@shared/lib/services';
 
 @Component({
   selector: 'app-register-page',
@@ -30,10 +29,8 @@ import {TokenModelService} from '@entity/token/model';
     Button,
     Password,
     Message,
-    RouterLink,
-    Toast
+    RouterLink
   ],
-  providers: [MessageService],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -41,7 +38,7 @@ import {TokenModelService} from '@entity/token/model';
 export class RegisterPageComponent {
   private readonly authService = inject(AuthApiService);
   private readonly tokenModelService = inject(TokenModelService);
-  private readonly messageService = inject(MessageService);
+  private readonly notificationService = inject(NotificationService)
   private readonly router = inject(Router);
 
   public loading: boolean = false;
@@ -61,7 +58,7 @@ export class RegisterPageComponent {
           this.router.navigate(['/dashboard']);
         },
         error: (error: {error: IServerError}) => {
-          this.messageService.add({life: 3000, severity: 'error', summary: 'Error', detail: error.error.message})
+          this.notificationService.show('error', 'Error', error.error.message)
           this.loading = false;
         }
       })

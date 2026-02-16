@@ -13,6 +13,10 @@ export class FileManagerService {
   fileStack$ = new BehaviorSubject<IFileStackItem[]>([]);
   currentDir$ = new BehaviorSubject<IFileStackItem | null>(null);
 
+  constructor() {
+    this.loadFileList();
+  }
+
   loadFileList() {
     if (this.currentDir$.value) this.fileApiService.getFilesList(this.currentDir$.value._id).subscribe((res) => this.fileList$.next(res))
     else this.fileApiService.getFilesList().subscribe((res) => this.fileList$.next(res))
@@ -29,5 +33,23 @@ export class FileManagerService {
     const fileStack = structuredClone(this.fileStack$.value);
     fileStack.push({_id: dir._id, name: dir.name});
     this.fileStack$.next(fileStack);
+  }
+
+  openDirectory(dir: IFileModel | IFileStackItem) {
+    this.pushToFileStack(dir);
+    this.currentDir$.next(dir);
+    this.loadFileList();
+  }
+
+  backToPrevDir() {
+    const prevDir = this.popFromFileStack();
+    if (!prevDir) {
+      this.currentDir$.next(null);
+    } else this.currentDir$.next(prevDir);
+    this.loadFileList();
+  }
+
+  deleteFileOrDir(item: IFileModel) {
+
   }
 }

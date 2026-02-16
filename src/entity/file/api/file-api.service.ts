@@ -43,4 +43,8 @@ export class FileApiService {
       }),
       filter((value) => value !== null))
   }
+
+  deleteFileOrDir() {
+    
+  }
 }

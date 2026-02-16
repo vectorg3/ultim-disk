@@ -12,10 +12,9 @@ import {ILoginDto} from '@pages/auth';
 import {Router, RouterLink} from '@angular/router';
 import {AutoFocus} from 'primeng/autofocus';
 import {AuthApiService} from '@pages/auth/api';
-import {MessageService} from 'primeng/api';
-import {Toast} from 'primeng/toast';
 import {IServerError} from '@shared/model';
 import {TokenModelService} from '@entity/token/model';
+import {NotificationService} from '@shared/lib/services';
 
 @Component({
   selector: 'app-login-page',
@@ -31,9 +30,8 @@ import {TokenModelService} from '@entity/token/model';
     Password,
     RouterLink,
     AutoFocus,
-    Toast
   ],
-  providers: [MessageService],
+  providers: [NotificationService],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -41,7 +39,7 @@ import {TokenModelService} from '@entity/token/model';
 export class LoginPageComponent {
   private readonly authService = inject(AuthApiService);
   private readonly tokenModelService = inject(TokenModelService);
-  private readonly messageService = inject(MessageService);
+  private readonly notificationService = inject(NotificationService);
   private readonly router = inject(Router);
 
   public loading: boolean = false;
@@ -60,7 +58,7 @@ export class LoginPageComponent {
           this.router.navigate(['/dashboard']);
         },
         error: (error: {error: IServerError}) => {
-          this.messageService.add({life: 3000, severity: 'error', summary: 'Error', detail: error.error.message})
+          this.notificationService.show('error', 'Error', error.error.message)
           this.loading = false;
         }
       })

@@ -1,5 +1,7 @@
-<p-context-menu #cm [model]="(contextMenuItems$ | async) ?? []" (onHide)="selectedFile$.next(null)"></p-context-menu>
+<p-context-menu #cm [model]="(contextMenuItems$ | async) ?? []"></p-context-menu>
 <app-file-breadcrumb></app-file-breadcrumb>
+<!-- For context menu delete function -->
+<p-confirmdialog />
 <p-table
   [value]="(fileList$ | async)!"
   [tableStyle]="{width: '100%', height: '100%'}"

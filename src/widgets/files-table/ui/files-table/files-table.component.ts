@@ -5,9 +5,10 @@ import {Button} from 'primeng/button';
 import {FileSizePipe} from '@shared/model';
 import {ContextMenu} from 'primeng/contextmenu';
 import {BehaviorSubject, map} from 'rxjs';
-import {FilesTableModelService} from '../../model';
-import {FileType, IFileModel} from '@entity/file/model';
+import {FileManagerService, FileType, IFileModel} from '@entity/file/model';
 import {FilesBreadcrumbComponent} from '@widgets/files-table/ui/files-breadcrumb';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-file-table',
@@ -19,15 +20,19 @@ import {FilesBreadcrumbComponent} from '@widgets/files-table/ui/files-breadcrumb
     FileSizePipe,
     ContextMenu,
     FilesBreadcrumbComponent,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
   templateUrl: './files-table.component.html',
   styleUrl: './files-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilesTableComponent {
-  private readonly fileModelService = inject(FilesTableModelService);
+  private fileManagerService = inject(FileManagerService);
+  private confirmationService = inject(ConfirmationService);
+
   protected readonly FileType = FileType;
-  protected readonly fileList$ = this.fileModelService.fileList$;
+  protected readonly fileList$ = this.fileManagerService.fileList$;
 
   protected selectedFile$ = new BehaviorSubject<IFileModel | null>(null);
 
@@ -62,15 +67,34 @@ export class FilesTableComponent {
         },
         {
           label: 'Delete', icon: 'pi pi-trash',
-          command: () => {}
+          command: () => this.confirmationService.confirm({
+            message: 'Do you want to delete this file?',
+            header: 'Confirm',
+            icon: 'pi pi-info-circle',
+            rejectLabel: 'Cancel',
+            rejectButtonProps: {
+              label: 'Cancel',
+              severity: 'secondary',
+              outlined: true
+            },
+            acceptButtonProps: {
+              label: 'Delete',
+              severity: 'danger'
+            },
+            accept: () => this.fileManagerService.deleteFileOrDir(this.selectedFile$.value!),
+          })
         }
       ] : []
     })
   )
 
+  constructor() {
+    this.selectedFile$.subscribe(console.log)
+  }
+
   openDirectory(id: string) {
     const file = structuredClone(this.fileList$.value).find((i) => i._id === id)!;
     if (file.type !== FileType.dir) return;
-    this.fileModelService.openDirectory(file)
+    this.fileManagerService.openDirectory(file)
   }
 }

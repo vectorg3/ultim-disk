@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {IUploadingFile} from '@features/file-upload';
-import {MessageService} from 'primeng/api';
 import {BehaviorSubject, filter, first, switchMap, tap} from 'rxjs';
 import {FileManagerService} from '@entity/file/model';
 import {FileApiService} from '@entity/file/api';
+import {NotificationService} from '@shared/lib/services';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import {FileApiService} from '@entity/file/api';
 export class FileUploadModelService {
   private fileApiService = inject(FileApiService);
   private fileManagerService = inject(FileManagerService);
-  private messageService = inject(MessageService);
+  private notificationService = inject(NotificationService);
 
   readonly uploadedFiles$ = new BehaviorSubject<IUploadingFile[]>([]);
 
@@ -44,17 +44,9 @@ export class FileUploadModelService {
     ).subscribe({
       next: (progress) => {
         this.fileManagerService.loadFileList();
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `File ${file.name} uploaded successfully`,
-        })
+        this.notificationService.show('success', 'Success', `File ${file.name} uploaded successfully`)
       },
-      error: err => this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: err.error.message,
-      })
+      error: err => this.notificationService.show('error', 'Error', err.error.message)
     })
   }
 }

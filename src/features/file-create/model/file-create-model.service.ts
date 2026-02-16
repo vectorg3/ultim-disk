@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {MessageService} from 'primeng/api';
 import {FileManagerService} from '@entity/file/model';
 import {TextInputDialogComponent} from '@shared/ui/text-input-dialog';
 import {FileApiService} from '@entity/file/api';
 import {IFileCreateDto} from '@entity/file/api/models';
+import {NotificationService} from '@shared/lib/services';
 
 export enum FileCreateType {
   directory = 'dir',
@@ -21,7 +21,7 @@ export const FileCreateTypeTitle = new Map<FileCreateType, string>([
 export class FileCreateModelService {
   private fileApiService = inject(FileApiService);
   private fileManagerService = inject(FileManagerService);
-  private messageService = inject(MessageService);
+  private notificationService = inject(NotificationService);
   private ref: DynamicDialogRef | undefined;
 
   constructor(public dialogService: DialogService) {}
@@ -45,18 +45,10 @@ export class FileCreateModelService {
       this.fileApiService.createDir(reqBody).subscribe({
         next: () => {
           this.fileManagerService.loadFileList();
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Directory created',
-          })
+          this.notificationService.show('success', 'Success', 'Directory created')
         },
         error: (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error.message,
-          })
+          this.notificationService.show('error', 'Error', err.error.message)
         }
       })
     })
