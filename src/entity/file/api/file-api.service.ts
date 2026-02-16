@@ -44,7 +44,9 @@ export class FileApiService {
       filter((value) => value !== null))
   }
 
-  deleteFileOrDir() {
-    
+  deleteFileOrDir(id: string) {
+    let params = new HttpParams();
+    params = params.append('fileId', id)
+    return this.http.delete(environment.apiUrl + '/disk/delete', {params})
   }
 }

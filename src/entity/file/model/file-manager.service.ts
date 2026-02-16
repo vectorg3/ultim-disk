@@ -1,13 +1,15 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {FileApiService} from '@entity/file/api';
-import {IFileModel, IFileStackItem} from '@entity/file/model/models';
+import {FileType, IFileModel, IFileStackItem} from '@entity/file/model/models';
+import {NotificationService} from '@shared/lib/services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileManagerService {
   private fileApiService = inject(FileApiService);
+  private notificationService = inject(NotificationService);
 
   fileList$ = new BehaviorSubject<IFileModel[]>([]);
   fileStack$ = new BehaviorSubject<IFileStackItem[]>([]);
@@ -50,6 +52,14 @@ export class FileManagerService {
   }
 
   deleteFileOrDir(item: IFileModel) {
-
+    this.fileApiService.deleteFileOrDir(item._id).subscribe({
+      next: () => {
+        this.fileList$.next(this.fileList$.value.filter((f) => f._id !== item._id));
+        this.notificationService.show('success', 'Success', `${item.type == FileType.dir ? 'Directory' : 'File'} was successfully deleted`);
+      },
+      error: (err) => {
+        this.notificationService.show('error', 'Error', err.error.message);
+      }
+    });
   }
 }
