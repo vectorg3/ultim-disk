@@ -1,2 +1,2 @@
-export {FileModelService} from './file-model.service'
-export * from './file.model'
+export {FileManagerService} from './file-manager.service'
+export * from './models'

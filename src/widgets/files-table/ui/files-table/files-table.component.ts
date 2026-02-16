@@ -1,28 +1,31 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {FileModelService, FileType, IFileModel} from '@entity/file';
 import {TableModule} from 'primeng/table';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {Button} from 'primeng/button';
-import {FileSizePipe} from '@entity/file/ui/files-table/file-size.pipe';
+import {FileSizePipe} from '@shared/model';
 import {ContextMenu} from 'primeng/contextmenu';
 import {BehaviorSubject, map} from 'rxjs';
+import {FilesTableModelService} from '../../model';
+import {FileType, IFileModel} from '@entity/file/model';
+import {FilesBreadcrumbComponent} from '@widgets/files-table/ui/files-breadcrumb';
 
 @Component({
-  selector: 'app-files-table',
+  selector: 'app-file-table',
   imports: [
     TableModule,
     AsyncPipe,
     DatePipe,
     Button,
     FileSizePipe,
-    ContextMenu
+    ContextMenu,
+    FilesBreadcrumbComponent,
   ],
   templateUrl: './files-table.component.html',
   styleUrl: './files-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilesTableComponent {
-  private readonly fileModelService = inject(FileModelService);
+  private readonly fileModelService = inject(FilesTableModelService);
   protected readonly FileType = FileType;
   protected readonly fileList$ = this.fileModelService.fileList$;
 

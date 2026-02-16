@@ -6,6 +6,8 @@ import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {refreshTokenInterceptor, tokenInterceptor} from '@app/interceptors';
+import {UserModelService} from '@entity/user';
+import {USER_TOKEN} from '@entity/user/model/models';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +24,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([tokenInterceptor, refreshTokenInterceptor])),
+    { provide: USER_TOKEN, useFactory: (s: UserModelService) => s.currentUser$, deps: [UserModelService]},
   ]
 };

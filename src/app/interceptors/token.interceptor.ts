@@ -1,6 +1,6 @@
 import {HttpInterceptorFn} from '@angular/common/http';
 import {inject} from '@angular/core';
-import {TokenModelService} from '../../shared';
+import {TokenModelService} from '@entity/token/model';
 
 // Крепит access токен к запросу
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {

@@ -23,6 +23,7 @@
       "@entity/*": ["src/entity/*"],
       "@env/*": ["src/environments/*"],
       "@features/*": ["src/features/*"],
+      "@widgets/*": ["src/widgets/*"],
       "@pages/*": ["src/pages/*"],
       "@shared/*": ["src/shared/*"],
     }

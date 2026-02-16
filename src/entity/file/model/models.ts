@@ -12,11 +12,12 @@ export interface IFileModel {
   backDir?: boolean;
 }
 
+export enum FileType {
+  dir = 'dir',
+}
+
+
 export interface IFileStackItem {
   _id: string;
   name: string;
-}
-
-export enum FileType {
-  dir = 'dir',
 }

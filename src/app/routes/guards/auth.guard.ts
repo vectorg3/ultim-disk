@@ -1,25 +1,26 @@
 import {CanActivateFn, Router} from '@angular/router';
-import {UserModelService} from '../../../entity';
 import {inject} from '@angular/core';
-import {UserApiService} from '../../../shared/api';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {TokenExpiredError, TokenModelService} from '../../../shared';
-import {TokenApiService} from '../../../shared/api/token/token-api.service';
+import {TokenExpiredError} from '@shared/model';
+import {TokenApiService} from '@entity/token/api/token-api.service';
+import {UserApiService} from '@entity/user/api/user-api.service';
+import {TokenModelService} from '@entity/token/model';
+import {USER_TOKEN} from '@entity/user/model/models';
 
 // Довольно длинный гуард, который пытается запросить пользователя по токену из хранилища, если в сторе его еще нет
 // Если в результате запроса возвращается ошибка что аксес токен экспайред, токены перезапрашиваются и запрос делается снова
 // И если на каком-то этапе ошибка возвращается вновь - гуард выкидывает пользователя
 export const authGuard: CanActivateFn = (route, state) => {
-  const userModelService = inject(UserModelService);
+  const currentUser$ = inject(USER_TOKEN);
   const tokenModelService = inject(TokenModelService);
   const tokenApiService = inject(TokenApiService);
   const router = inject(Router);
-  if (userModelService.currentUser$.value) return of(true);
+  if (currentUser$.value) return of(true);
   else {
     const userApiService = inject(UserApiService);
     return userApiService.getUser().pipe(
-      tap((user) => userModelService.currentUser$.next(user)),
+      tap((user) => currentUser$.next(user)),
       catchError((err: HttpErrorResponse) => {
         if (err.error.message == TokenExpiredError) {
           const refreshToken = tokenModelService.getTokens().refreshToken;
@@ -32,7 +33,7 @@ export const authGuard: CanActivateFn = (route, state) => {
                   return userApiService.getUser()
                 }),
                 map((user) => {
-                  userModelService.currentUser$.next(user);
+                  currentUser$.next(user);
                   return blockRoute()
                 }),
                 catchError((err) => {
@@ -40,7 +41,6 @@ export const authGuard: CanActivateFn = (route, state) => {
                 })
               )
           } catch (err) {
-            console.error(err);
             return blockRoute()
           }
         } else return blockRoute()

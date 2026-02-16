@@ -1,13 +1,13 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Breadcrumb} from 'primeng/breadcrumb';
-import {FileModelService} from '@entity/file';
 import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {MenuItem} from 'primeng/api';
 import {Button} from 'primeng/button';
+import {FilesTableModelService} from '@widgets/files-table/model';
 
 @Component({
-  selector: 'app-files-breadcrumb',
+  selector: 'app-file-breadcrumb',
   imports: [
     Breadcrumb,
     AsyncPipe,
@@ -18,11 +18,11 @@ import {Button} from 'primeng/button';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilesBreadcrumbComponent {
-  private fileModelService = inject(FileModelService);
+  private filesTableModelService = inject(FilesTableModelService);
 
-  public items$: Observable<MenuItem[]> = this.fileModelService.fileStack$.pipe(
+  public items$: Observable<MenuItem[]> = this.filesTableModelService.fileStack$.pipe(
     map((items) => (items.map((item) => ({label: item.name}))))
   )
 
-  back = () => this.fileModelService.backToPrevDir();
+  back = () => this.filesTableModelService.backToPrevDir();
 }

@@ -14,7 +14,8 @@ import {AutoFocus} from 'primeng/autofocus';
 import {AuthApiService} from '@pages/auth/api';
 import {MessageService} from 'primeng/api';
 import {Toast} from 'primeng/toast';
-import {IServerError, TokenModelService} from '@shared/model';
+import {IServerError} from '@shared/model';
+import {TokenModelService} from '@entity/token/model';
 
 @Component({
   selector: 'app-login-page',

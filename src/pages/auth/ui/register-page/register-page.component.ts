@@ -11,10 +11,11 @@ import {Button} from 'primeng/button';
 import {Password} from 'primeng/password';
 import {Message} from 'primeng/message';
 import {Router, RouterLink} from '@angular/router';
-import {IServerError, TokenModelService} from '@shared/model';
+import {IServerError} from '@shared/model';
 import {AuthApiService} from '@pages/auth/api';
 import {MessageService} from 'primeng/api';
 import {Toast} from 'primeng/toast';
+import {TokenModelService} from '@entity/token/model';
 
 @Component({
   selector: 'app-register-page',

@@ -7,3 +7,5 @@ export interface ITokensUnpacked {
   accessToken?: string;
   refreshToken?: string;
 }
+
+export const TokenExpiredError = 'Token expired'

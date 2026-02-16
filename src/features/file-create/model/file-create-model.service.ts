@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {FileCreateApiService, FileCreateDialogComponent, IFileCreateDto} from '@features/file-create';
-import {FileModelService} from '@entity/file';
 import {MessageService} from 'primeng/api';
+import {FileManagerService} from '@entity/file/model';
 
 export enum FileCreateType {
   directory = 'dir',
@@ -18,7 +18,7 @@ export const FileCreateTypeTitle = new Map<FileCreateType, string>([
 })
 export class FileCreateModelService {
   private fileCreateApiService = inject(FileCreateApiService);
-  private fileModelService = inject(FileModelService);
+  private fileManagerService = inject(FileManagerService);
   private messageService = inject(MessageService);
   private ref: DynamicDialogRef | undefined;
 
@@ -39,10 +39,10 @@ export class FileCreateModelService {
         name,
         type: FileCreateType.directory,
       };
-      if (this.fileModelService.currentDir$.value) reqBody.parent = this.fileModelService.currentDir$.value._id;
+      if (this.fileManagerService.currentDir$.value) reqBody.parent = this.fileManagerService.currentDir$.value._id;
       this.fileCreateApiService.createDir(reqBody).subscribe({
         next: () => {
-          this.fileModelService.loadFileList();
+          this.fileManagerService.loadFileList();
           this.messageService.add({
             severity: 'success',
             summary: 'Success',

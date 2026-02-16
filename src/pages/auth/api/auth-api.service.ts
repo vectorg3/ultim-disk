@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ILoginDto, IRegisterDto} from '../model';
-import {environment} from '../../../environments';
-import {ITokens} from '../../../shared';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
+import {ITokens} from '@entity/token/model';
 
 @Injectable({
   providedIn: 'root'

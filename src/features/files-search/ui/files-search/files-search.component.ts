@@ -4,7 +4,7 @@ import {InputIcon} from 'primeng/inputicon';
 import {InputText} from 'primeng/inputtext';
 
 @Component({
-  selector: 'app-files-search',
+  selector: 'app-file-search',
   imports: [
     IconField,
     InputIcon,

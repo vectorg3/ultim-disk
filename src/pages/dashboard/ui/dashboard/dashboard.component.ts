@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {HeaderComponent} from '@shared/ui';
 import {Divider} from 'primeng/divider';
-import {FilesBreadcrumbComponent, FilesTableComponent} from '@entity/file';
 import {Toast} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {FileUploadComponent, FileUploadModelService} from '@features/file-upload';
 import {FileCreateBtnComponent} from '@features/file-create';
+import {FilesTableComponent} from '@widgets/files-table';
+import {HeaderComponent} from '@pages/dashboard/ui/header';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +14,8 @@ import {FileCreateBtnComponent} from '@features/file-create';
     Divider,
     FileUploadComponent,
     FileCreateBtnComponent,
-    FilesTableComponent,
-    FilesBreadcrumbComponent,
     Toast,
+    FilesTableComponent,
   ],
   providers: [MessageService, FileUploadModelService],
   templateUrl: './dashboard.component.html',

@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Avatar} from 'primeng/avatar';
-import {UserModelService} from '@entity/user';
 import {filter, map} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {Menu} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
-import {TokenModelService} from '@shared/model';
 import {Router} from '@angular/router';
+import {USER_TOKEN} from '@entity/user/model/models';
+import {TokenModelService} from '@entity/token/model';
 
 @Component({
   selector: 'app-user-menu',
@@ -20,11 +20,11 @@ import {Router} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMenuComponent {
-  private readonly userModelService = inject(UserModelService);
   private readonly tokenModelService = inject(TokenModelService);
   private readonly router = inject(Router);
 
-  user$ = this.userModelService.currentUser$
+  user$ = inject(USER_TOKEN);
+
   userAvatar$ = this.user$.pipe(
     filter((user) => !!user),
     map((user) => String(user.name[0]).toUpperCase())

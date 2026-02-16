@@ -1,2 +1,2 @@
 export * from './models'
-export * from './token';
+export * from './file-size.pipe';

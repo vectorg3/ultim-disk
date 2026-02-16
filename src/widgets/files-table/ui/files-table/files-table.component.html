@@ -1,5 +1,5 @@
 <p-context-menu #cm [model]="(contextMenuItems$ | async) ?? []" (onHide)="selectedFile$.next(null)"></p-context-menu>
-
+<app-file-breadcrumb></app-file-breadcrumb>
 <p-table
   [value]="(fileList$ | async)!"
   [tableStyle]="{width: '100%', height: '100%'}"
