@@ -3,4 +3,3 @@ export interface IFileCreateDto {
   type: string;
   parent?: string;
 }
-

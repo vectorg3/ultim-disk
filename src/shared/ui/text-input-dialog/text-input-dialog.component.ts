@@ -6,7 +6,7 @@ import {AutoFocus} from 'primeng/autofocus';
 import {Button} from 'primeng/button';
 
 @Component({
-  selector: 'app-file-create-dialog',
+  selector: 'app-text-input-dialog',
   imports: [
     InputText,
     FormsModule,
@@ -14,11 +14,11 @@ import {Button} from 'primeng/button';
     Button
   ],
   providers: [DialogService],
-  templateUrl: './file-create-dialog.component.html',
-  styleUrl: './file-create-dialog.component.scss',
+  templateUrl: './text-input-dialog.component.html',
+  styleUrl: './text-input-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileCreateDialogComponent {
+export class TextInputDialogComponent {
   @ViewChild('textInput') textInput: ElementRef<HTMLInputElement> | undefined;
   name: string = 'New Directory';
 

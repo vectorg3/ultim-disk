@@ -1,14 +1,15 @@
 import {inject, Injectable} from '@angular/core';
-import {FileUploadApiService, IUploadingFile} from '@features/file-upload';
+import {IUploadingFile} from '@features/file-upload';
 import {MessageService} from 'primeng/api';
 import {BehaviorSubject, filter, first, switchMap, tap} from 'rxjs';
 import {FileManagerService} from '@entity/file/model';
+import {FileApiService} from '@entity/file/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadModelService {
-  private fileUploadApiService = inject(FileUploadApiService);
+  private fileApiService = inject(FileApiService);
   private fileManagerService = inject(FileManagerService);
   private messageService = inject(MessageService);
 
@@ -28,8 +29,8 @@ export class FileUploadModelService {
         this.uploadedFiles$.next(uploadedFiles);
       }),
       switchMap((dir) => {
-        if (dir) return this.fileUploadApiService.uploadFileToServer(file, dir)
-        else return this.fileUploadApiService.uploadFileToServer(file);
+        if (dir) return this.fileApiService.uploadFileToServer(file, dir)
+        else return this.fileApiService.uploadFileToServer(file);
       }),
       tap((progress) => {
         if (typeof progress == 'number') {
