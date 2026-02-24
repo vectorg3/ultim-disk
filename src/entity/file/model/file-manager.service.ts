@@ -3,6 +3,9 @@ import {BehaviorSubject} from 'rxjs';
 import {FileApiService} from '@entity/file/api';
 import {FileType, IFileModel, IFileStackItem} from '@entity/file/model/models';
 import {NotificationService} from '@shared/lib/services';
+import {saveAs} from 'file-saver';
+import {IServerError} from '@shared/model';
+import {getFilenameFromHeaders} from '@entity/file/api/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +64,16 @@ export class FileManagerService {
         this.notificationService.show('error', 'Error', err.error.message);
       }
     });
+  }
+
+  downloadFile(item: IFileModel) {
+    this.fileApiService.downloadFileFromServer(item._id).subscribe({
+      next: (response) => {
+        if (response.body) saveAs(response.body, getFilenameFromHeaders(response.headers));
+      },
+      error: (error: {error: IServerError}) => {
+        this.notificationService.show('error', 'Error', error.error.message)
+      }
+    })
   }
 }

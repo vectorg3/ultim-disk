@@ -8,7 +8,6 @@ export class NotificationService {
   private messageService = inject(MessageService);
 
   show(severity: 'success' | 'info' | 'warn' | 'error', summary: string, detail: string): void {
-    console.log('sd')
     this.messageService.add({
       severity,
       summary,

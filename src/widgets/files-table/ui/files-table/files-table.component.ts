@@ -47,8 +47,9 @@ export class FilesTableComponent {
           separator: true
         },
         {
+          visible: this.selectedFile$.value?.type !== 'dir',
           label: 'Download', icon: 'pi pi-download',
-          command: () => {},
+          command: () => this.fileManagerService.downloadFile(this.selectedFile$.value!),
         },
         {
           label: 'Rename', icon: 'pi pi-pen-to-square',
@@ -87,10 +88,6 @@ export class FilesTableComponent {
       ] : []
     })
   )
-
-  constructor() {
-    this.selectedFile$.subscribe(console.log)
-  }
 
   openDirectory(id: string) {
     const file = structuredClone(this.fileList$.value).find((i) => i._id === id)!;
